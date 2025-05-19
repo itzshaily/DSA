@@ -1,0 +1,36 @@
+Given an array arr[] of integers and a number x, the task is to find the sum of subarray having a maximum sum less than or equal to the given value of x.
+
+Examples:
+
+Input: arr[] = [1, 2, 3, 4, 5], x = 11 
+Output: 10
+Explanation: Subarray having maximum sum is [1, 2, 3, 4].
+
+
+Solution :
+
+
+class Solution {
+  public:
+    long long findMaxSubarraySum(vector<int>& arr, long long x) {
+        // Your code goes here
+        
+        int start =0;
+        int curr_sum =0;
+        int maxSum =0;
+        
+        for(int end =0 ; end < arr.size() ; end++ ){
+            curr_sum += arr[end];
+            
+            while(curr_sum > x && start<=end){
+                curr_sum -= arr[start];
+                start++;
+            }
+            
+            if(curr_sum <= x){
+                maxSum = max(maxSum , curr_sum);
+            }
+        }
+        return maxSum;
+    }
+};
