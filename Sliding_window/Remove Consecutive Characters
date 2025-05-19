@@ -1,0 +1,33 @@
+You are given a string s, consisting of lowercase alphabets. Your task is to remove consecutive duplicate characters from the string. 
+
+Example:
+
+Input: s = "aabb"
+Output:  "ab" 
+Explanation: 
+The character 'a' at index 2 is the same as 'a' at index 1, so it is removed.
+Similarly, the character 'b' at index 4 is the same as 'b' at index 3, so it is removed.
+The final string is "ab".
+
+
+
+Solution:
+
+
+class Solution {
+  public:
+    string removeConsecutiveCharacter(string& s) {
+        // code here.
+        string res;
+        res += s[0];
+        
+        for(int i = 1 ; i < s.length() ; i++){
+            
+            if(s[i] != s[i-1]){
+               res += s[i]; 
+            }
+            
+        }
+        return res;
+    }
+};
