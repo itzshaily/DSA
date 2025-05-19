@@ -1,0 +1,55 @@
+Given two strings txt and pat having lowercase letters, the task is to check if any permutation of pat is a substring of txt.
+
+Examples:
+
+Input: txt = "geeks", pat = "eke"
+Output: true
+Explanation: "eek" is a permutation of "eke" which exists in "geeks".
+
+
+
+Solution:
+
+
+class Solution {
+  public:
+    bool search(string& txt, string& pat) {
+        // Write your code here
+        int n = txt.size();
+        int m = pat.size();
+        
+        vector<int>patFreq(26,0);
+        vector<int>windowFreq(26,0);
+        
+        for(int i = 0 ; i < m ; i++){
+            patFreq[pat[i] - 'a']++;
+            windowFreq[txt[i] - 'a']++;
+        }
+        
+        // match the first window with pattern
+        
+        if(patFreq == windowFreq){
+            return true;
+        }
+        
+        // slide the window 
+        
+        for(int i = m ; i < n ; i++){
+            
+            //add new char to the window
+            
+            windowFreq[txt[i]-'a']++;
+            
+            // remove the first elem of the window
+            
+            windowFreq[txt[i-m]-'a']--;
+         
+         if(windowFreq == patFreq){
+            return true;
+            
+        }
+        }
+        
+        return false;
+    }
+};
