@@ -1,0 +1,60 @@
+Given a string S consisting of the characters 0, 1 and 2. Your task is to find the length of the smallest substring of string S that contains all the three characters 0, 1 and 2.
+If no such substring exists, then return -1.
+
+Example 1:
+
+Input:
+S = 10212
+Output:
+3
+Explanation:
+The substring 102 is the smallest substring
+that contains the characters 0, 1 and 2.
+
+
+
+Solution:
+
+class Solution {
+  public:
+    int smallestSubstring(string S) {
+        // Code here
+        
+        int n = S.length();
+        int freq[3] ={0};
+        int start =0;
+        int count =0;
+        int min_length =INT_MAX;
+        
+        for(int end = 0 ; end < n ; end++){
+            
+            // convert every elem of string into integer type--
+            
+            int digit = S[end]-'0';
+            
+            freq[digit]++;
+            
+            if(freq[digit] == 1){
+                count++;
+            }
+            
+            while(count == 3){
+                
+                min_length = min(min_length , end-start+1);
+                
+                // shrink the window from left --
+                int left_digit = S[start]-'0';
+                
+                freq[left_digit]--;
+                
+                if(freq[left_digit] == 0){
+                    count--;
+                }
+                
+                start++;
+            }
+            
+        }
+        return (min_length == INT_MAX) ? -1 : min_length;
+}
+};
